@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPOSITORY_URL = 'https://github.com/newdelthis/docker_jenkins_demo.git'
-        DOCKER_IMAGE_NAME = 'newdelthis/docker_jenkins_demo'
+        GIT_REPOSITORY_URL = 'https://github.com/VasavadaHet/docker_jenkins_demo.git'
+        DOCKER_IMAGE_NAME = 'VasavadaHet/docker_jenkins_demo'
         IMAGE_TAG = '1.0'
     }
 
@@ -39,11 +39,11 @@ pipeline {
                 script {
                     try {
                         withCredentials([usernamePassword(credentialsId: 'my-docker-hub-credentials-id', 
-                                                         usernameVariable: 'DOCKER_USERNAME', 
-                                                         passwordVariable: 'DOCKER_PASSWORD')]) {
+                                                         usernameVariable: 'admin', 
+                                                         passwordVariable: 'admin')]) {
                             // Explicit login before push
                             sh """
-                            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                            echo "admin" | docker login -u "admin" --password-stdin
                             docker push ${DOCKER_IMAGE_NAME}:${IMAGE_TAG}
                             """
                         }
